@@ -10,11 +10,10 @@ const store = useStore(key);
 const cartStore = store.state.cart
 const categoriesStore = store.state.categories
 const productsStore = store.state.products
-function testAddProductToCart(){
-   store.commit('addProduct')
-}
+
 
 onMounted(async () => {
+    store.getters.initiCart
   await store.commit("getCategories")
     
 })
@@ -27,7 +26,7 @@ onMounted(async () => {
             <span class="font-bold text-lg"> MyStore </span>
         </div>
         <input type="text" placeholder="Buscar produto" class="rounded-md pl-5 h-10 w-6/12">
-        <button @click="testAddProductToCart" class=" text-white flex">
+        <button  class=" text-white flex">
            
               <CartIcon class="icon"/>
               
@@ -36,9 +35,9 @@ onMounted(async () => {
                 </div>
             </button>
     </header>
-    <div class="bg-primary shadow-md p-3 flex justify-around ">
+    <div v-if="!!categoriesStore" class="bg-primary shadow-lg p-3 flex justify-around ">
         
-        <span v-for="category  in categoriesStore.categories" class="text-white text-lg cursor-pointer">{{category.name}}</span>
+        <span  v-for="category  in categoriesStore.categories" class="text-white text-lg cursor-pointer">{{category.name}}</span>
         <!-- <span class="text-black text-lg">jewelery</span>
         <span class="text-black text-lg">men's clothing</span>
         <span class="text-black text-lg">women's clothing</span> -->

@@ -1,23 +1,23 @@
-import type { ProductState } from "./products-store";
+import type { ProductState, RatingState } from "./products-store";
 
 
-const productToTest: ProductState = {
-    "id": 9,
-		"title": "WD 2TB Elements Portable External Hard Drive - USB 3.0 ",
-		"price": 64,
-		"description": "USB 3.0 and USB 2.0 Compatibility Fast data transfers Improve PC Performance High Capacity; Compatibility Formatted NTFS for Windows 10, Windows 8.1, Windows 7; Reformatting may be required for other operating systems; Compatibility may vary depending on user’s hardware configuration and operating system",
-		"category": "electronics",
-		"image": "https://fakestoreapi.com/img/61IBBVJvSDL._AC_SY879_.jpg",
-		"rating": {
-			"rate": 3.3,
-			"count": 203
+interface ProductInCart {
+    product:{
+        id: number,
+        title: string,
+        price: number,
+        description: string,
+        category: string,
+        image: string,
+        rating: RatingState,
+    },
+    amount: number,
+    count: number
 }
-}
-
 
 export interface CartState {
     cart_count: number,
-    products: ProductState[],
+    products: ProductInCart[],
     amount: number,
   }
 
@@ -35,25 +35,55 @@ state,
 
 getters:{
     
-sayHi(state:CartState){
+initiCart(state:CartState){
     const cartProducts = localStorage.getItem('@MyStore:CART_PRODUCTS')
-
-    console.log(cartProducts);
     cartProducts ? state.products = JSON.parse(cartProducts) : localStorage.setItem('@MyStore:CART_PRODUCTS',JSON.stringify([]))
     cartProducts ?  state.cart_count = state.products.length : 0
-    return "teste " + state.cart_count
-}
+},
+checkHasInCart: (state:CartState) =>  (product: ProductState) => {
+    const checkProduct =  state.products.some((prod) => prod.product.id === product.id)
+    return checkProduct
+  },
+
+  getProductCount: (state:CartState) =>  (product: ProductState) => {
+    const count  = state.products.filter((prod) => prod.product.id === product.id)
+    return count[0].count
+  }
+
 },
 actions:{
 
 },
 mutations:{
-addProduct(state: CartState){
-    state.products.push(productToTest);
-    state.cart_count = state.products.length;
-    console.log(state.products);
+addProduct(state: CartState, payload: ProductState){
+   const newInCart = state.products.some((prod) => prod.product.id === payload.id)
+    const newProduct = {
+        product: payload,
+        count: 1,
+        amount: payload.price
+    } as ProductInCart
     
-}
+    !newInCart && state.products.push(newProduct);
+    state.cart_count = state.products.length;
+    localStorage.setItem('@MyStore:CART_PRODUCTS',JSON.stringify(state.products))
+},
+incrementProductQtd(state: CartState, payload:ProductState){
+    const i = state.products.findIndex((prod) => prod.product.id === payload.id)
+    state.products[i].count +=1
+    localStorage.setItem('@MyStore:CART_PRODUCTS',JSON.stringify(state.products))
+},
+decreaseProductQtd(state: CartState, payload:ProductState){
+    const i = state.products.findIndex((prod) => prod.product.id === payload.id)
+    if(state.products[i].count > 1){
+        state.products[i].count -=1
+       return localStorage.setItem('@MyStore:CART_PRODUCTS',JSON.stringify(state.products))
+    }
+   state.products = state.products.filter((product, index) => index !== i)
+   state.cart_count = state.products.length
+   localStorage.setItem('@MyStore:CART_PRODUCTS',JSON.stringify(state.products))
+},
+
+
 },
 
 }

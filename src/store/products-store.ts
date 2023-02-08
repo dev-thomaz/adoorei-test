@@ -1,7 +1,7 @@
 import { createStore } from "vuex";
 
 
-interface RatingState {
+export interface RatingState {
 rate: number,
 count: number
 }
@@ -26,7 +26,6 @@ products: []
 },
 
 getters:{
-
 },
 mutations:{
 

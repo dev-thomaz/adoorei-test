@@ -1,0 +1,8 @@
+<template>
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20px" height="20px" viewBox="0 0 50 50" version="1.1" fill="currentColor">
+        <g id="surface1">
+        <path d="M 46.875 20.214844 L 30.136719 20.214844 L 25 4.679688 L 19.863281 20.214844 L 3.125 20.214844 L 16.816406 29.773438 L 11.484375 45.3125 L 25 35.683594 L 38.515625 45.3125 L 33.171875 29.773438 Z M 46.875 20.214844 "/>
+        </g>
+        </svg>
+        
+</template>

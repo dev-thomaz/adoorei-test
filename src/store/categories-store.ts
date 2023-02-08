@@ -35,7 +35,6 @@ export const categories = {
                     } as CategoryState
 
                     state.categories.push(newCategory as CategoryState)
-                    console.log(state.categories);
                 })
 
             } catch (error) {
