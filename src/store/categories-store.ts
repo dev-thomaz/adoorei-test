@@ -1,4 +1,5 @@
 import { api } from "@/services/api";
+import type { ActionContext } from "vuex";
 
 interface CategoryState {
     name: string;
@@ -23,7 +24,9 @@ export const categories = {
 
     },
     actions: {
-
+        getCategories({commit}: ActionContext<CategoriesState, CategoriesState>){
+            commit('getCategories')
+        }
     },
     mutations: {
         async getCategories(state: CategoriesState) {
@@ -31,7 +34,7 @@ export const categories = {
                 const categories = await api.get('products/categories')
                 categories.data.map((category: string) => {
                     const newCategory = {
-                        name: category
+                        name: category.charAt(0).toUpperCase() + category.slice(1)
                     } as CategoryState
 
                     state.categories.push(newCategory as CategoryState)

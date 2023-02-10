@@ -15,6 +15,6 @@ export const store = createStore({
 modules: {
     cart,
     products,
-    categories
+    categories,
 }
 })

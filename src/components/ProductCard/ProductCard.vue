@@ -2,28 +2,15 @@
 import type { ProductState } from '@/store/products-store';
 import { useStore } from 'vuex'
 import {key} from '../../store'
-import { onMounted } from 'vue'
 import CartIcon from '../icons/IconCart.vue'
 import {ProductCounter, Rating} from '@/components'
+import { convertCurrency } from '@/helper/helpers'
+
 const props = defineProps<{
     product: ProductState
 }>()
-
+const innerWidth = window.innerWidth
 const store = useStore(key);
-const cartStore = store.state.cart
-
-
-
-function convertCurrency(value: number){
-   return value.toLocaleString('pt-BR', {
-  style: 'currency',
-  currency: 'BRL',
-});
-}
-
-function test(id: number){
-return store.commit('checkHasInCart', id)
-}
 
 function checkProductInCart(){
 return  store.getters.checkHasInCart(props.product) 
@@ -33,32 +20,52 @@ function addProductToCart(product:ProductState){
    store.commit('addProduct', product)
 }
 
-
-onMounted( () => {
-
-})
 </script>
 
 <template>
-    
-        <div class="w-60 flex items-center shadow-md rounded-xl overflow-hidden justify-between  bg-white flex-col p-2  hover:shadow-lg">
+    <div  v-if="innerWidth > 512">
+        <div class="w-80 flex items-center shadow-md rounded-xl overflow-hidden justify-between  bg-white flex-col p-2  hover:shadow-lg">
             <div class="flex justify-center h-30 cursor-pointer">
-                <img class="object-scale-down h-48 w-48 " :src="product.image" alt="">
+                <img v-lazy="product.image" class="object-scale-down h-48 w-48 "  alt="">
             </div>
             <div class="h-24 self-start pt-5  cursor-pointer">
                 <span class="text-md font-medium text-gray">{{product.title}}</span>
             </div>
-            <Rating :rating="product.rating"/>
+            <Rating v-if="product.rating" :rating="product.rating"/>
             <div class="mt-10 flex  items-center gap-2">
-                <span class="font-bold text-lg text-gray">{{convertCurrency(product.price)}}</span>
+                <span v-if="product.price" class="font-bold text-lg text-gray">{{convertCurrency(product.price)}}</span>
                 <div class="flex items-center justify-self-end">
-                    <span class="pl-5 hover:text-primary cursor-pointer flex gap-1" @click="addProductToCart(product)" v-if="!checkProductInCart()">
-                      <CartIcon />  adicionar
+                    <span class="pl-5 hover:text-primary cursor-pointer flex gap-1" @click="addProductToCart(product)"  v-if="!checkProductInCart()">
+                        <CartIcon />  adicionar
                     </span>
                     <ProductCounter v-if="checkProductInCart()" :product="product" />
                     
                 </div>
             </div>
         </div>
- 
+    </div>
+    
+    <div  v-else>
+        <div class="w-40 flex items-center shadow-md rounded-xl overflow-hidden justify-between  bg-white flex-col p-2  hover:shadow-lg">
+            <div class="flex justify-center h-30 cursor-pointer">
+                <img v-lazy="product.image" class="object-scale-down h-24 w-24 "  alt="">
+            </div>
+            <div class="max-h-12 self-start pt-2  cursor-pointer text-ellipsis overflow-hidden">
+                <span class="text-sm font-medium text-gray text-ellipsis">{{product.title}}</span>
+            </div>
+            <Rating :rating="product.rating"/>
+            <div class=" flex flex-col  items-center justify-center gap-2">
+                <span  class="font-bold text-sm text-gray">{{convertCurrency(product.price)}}</span>
+                <div class="flex flex-col items-center justify-self-end">
+                    <span class="pl-2 hover:text-primary cursor-pointer text-sm flex gap-1" @click="addProductToCart(product)"  v-if="!checkProductInCart()">
+                        <CartIcon />  adicionar
+                    </span>
+                    <ProductCounter v-if="checkProductInCart()" :product="product" />
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+        
 </template>

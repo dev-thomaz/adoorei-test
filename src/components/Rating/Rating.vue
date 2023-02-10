@@ -7,6 +7,7 @@ import EmptyStarIcon from '@/components/icons/IconEmptyStar.vue';
 const props = defineProps<{
     rating: RatingState
 }>()
+const innerWidth = window.innerWidth
 
 function generateRatingStar(rating: RatingState) {
     let rateStar = []
@@ -30,12 +31,22 @@ generateRatingStar(props.rating)
 
 
 <template>
-    <div class="flex pt-6 items-center">
+    <div v-if="innerWidth > 512" class="flex pt-6 items-center">
         <span v-for="star in generateRatingStar(rating)" class="text-primary flex">
             <FilledStarIcon v-if="star == 'full'" />
             <EmptyStarIcon v-if="star == 'empty'" />
             <HalfStarIcon v-if="star == 'half'" />
         </span>
+        <span class="text-sm ml-5 text-gray">{{rating.count}} avaliações</span>
+    </div>
+    <div v-else class="flex flex-col py-3 items-center">
+        <div class="flex">
+            <span v-for="star in generateRatingStar(rating)" class="text-primary flex">
+                <FilledStarIcon v-if="star == 'full'" />
+                <EmptyStarIcon v-if="star == 'empty'" />
+                <HalfStarIcon v-if="star == 'half'" />
+            </span>
+        </div>
         <span class="text-sm ml-5 text-gray">{{rating.count}} avaliações</span>
     </div>
 </template>
