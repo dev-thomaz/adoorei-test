@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ProductCard } from '@/components';
+import { ProductCard, Loading } from '@/components';
 import { key } from '@/store';
 import { onMounted, ref } from 'vue';
 import { useStore } from 'vuex';
@@ -10,11 +10,15 @@ const productsStore = store.state.products
 
 
 onMounted(async () => {
-	await store.commit('getProducts')
+	
+	await store.dispatch('getProducts')
+
+	
 })
 </script>
 
 <template>
+	<Loading />
 	<img src="../assets/images/banner-1.jpeg" alt="">
 
 

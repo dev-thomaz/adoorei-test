@@ -15,6 +15,7 @@ module.exports = {
       positive_dark:'#028A0D', 
       secondary: '#13ADDB',
       white: '#fff',
+      white_soft:'#FBFBFB',
       black: '#000',
       gray: '#666',
       soft_white: '#F1F1F1'

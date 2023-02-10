@@ -9,14 +9,14 @@ const route = useRoute()
 const productsStore = store.state.products
 const query = ref(route.params.name)
 onMounted(async () => {
-    await store.commit('getPRoductByCategory', route.params.name)
+    await store.commit('getProductByCategory', route.params.name)
     console.log(productsStore);
     
 })
 onUpdated(async () => {
 if(query.value !== route.params.name){
     query.value = route.params.name
-    await store.commit('getPRoductByCategory', route.params.name)
+    await store.commit('getProductByCategory', route.params.name)
     
 }
 

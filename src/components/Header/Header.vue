@@ -45,6 +45,10 @@ onMounted(async () => {
     </header>
     <div v-if="innerWidth > 512">
         <div :class="{ 'bg-primary p-3 flex  justify-center gap-24': !!categoriesStore.categories, }">
+            <RouterLink to="/" 
+                class="text-white text-lg cursor-pointer hover:text-secondary hover:font-bold hover:animate-pulse transition-colors duration-500" >
+                Home
+            </RouterLink>
             <div  v-for="category  in categoriesStore.categories">
                 <RouterLink :to="'/categoria/' + category.name" 
                 class="text-white text-lg cursor-pointer hover:text-secondary hover:font-bold hover:animate-pulse transition-colors duration-500">
