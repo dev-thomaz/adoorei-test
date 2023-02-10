@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import {Category} from '@/views'
+import {Category, MobileCart} from '@/views'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -19,8 +19,13 @@ const router = createRouter({
       name:'caterogy',
       component: Category,
       props: route => ({query: route.query.q}),
-      meta: {transition: 'fade'}
+      meta: {transition: 'fade'},
     },
+    {
+      path:'/mobile-cart',
+      name: 'mobile-cart',
+      component: MobileCart,
+    }
   ]
 })
 
