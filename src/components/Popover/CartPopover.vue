@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import CartIcon from '../icons/IconCart.vue'
-import {  ref } from 'vue';
+import SadIcon from '../icons/IconSad.vue'
+import { ref } from 'vue';
 import { useStore } from 'vuex'
 import { key } from '../../store'
 import { convertCurrency } from '@/helper/helpers'
-import {ProductCounter} from '@/components'
+import { ProductCounter } from '@/components'
 import { useRouter } from 'vue-router';
 const store = useStore(key);
 const cartStore = store.state.cart
@@ -12,10 +13,11 @@ const isOpen = ref(false)
 const innerWidth = window.innerWidth
 const router = useRouter()
 
-function handlePopOver (value: boolean) {
+function handlePopOver(value: boolean) {
     isOpen.value = value
-    innerWidth <512 && router.push('/mobile-cart')
+    innerWidth < 512 && router.push('/mobile-cart')
 }
+
 
 </script>
 
@@ -28,10 +30,10 @@ function handlePopOver (value: boolean) {
             <span>{{ cartStore.cart.cart_count }}</span>
         </div>
 
-        <div v-if="innerWidth > 512" v-show="isOpen" class="bg-white text-black rounded-lg absolute top-6 w-80 z-10 right-0 p-2" >
-            <div class="max-h-80 overflow-y-scroll overflow-visible">
+        <div v-if="innerWidth > 512" v-show="isOpen" class="bg-white text-black rounded-lg absolute top-4 w-80 z-10 right-2 p-2">
+            <div v-if="cartStore.cart.products.length" class="h-80 overflow-y-scroll  p-2">
 
-                <div v-for="product in cartStore.cart.products" class="">
+                <div  v-for="product in cartStore.cart.products" class="">
 
                     <div class="flex items-center gap-2">
                         <div class="w-18 ">
@@ -42,26 +44,33 @@ function handlePopOver (value: boolean) {
                                 {{ product.title }}
                             </span>
                         </div>
-                        <ProductCounter :product="product"/>
-                      
+                        <ProductCounter :product="product" />
+
                     </div>
                     <div class="flex justify-around items-center">
                         <span class="text-sm ">
-                            {{ product.count }} x {{ convertCurrency(product.price) }} = {{ convertCurrency(product.amount) }}
+                            {{ product.count }} x {{ convertCurrency(product.price) }} = {{
+                                convertCurrency(product.amount)
+                            }}
                         </span>
-                        
+
                     </div>
                 </div>
-
             </div>
-            <div class="flex justify-between">
-                <span>Valor do carrinho: </span>
-                <span > {{ convertCurrency(cartStore.cart.amount) }}</span>
+            <div class="flex justify-center items-center  h-20" v-else>
+                <SadIcon class="text-gray"/>
+                <span>oops! seu carrinho está vazio!</span>
             </div>
-            <div>
-                <button class="bg-primary w-full text-white font-bold h-10 rounded-md">Finalizar pedido</button>
+            <div v-show="cartStore.cart.products.length">
+                <div class="flex justify-between p-6">
+                    <span>Valor do carrinho: </span>
+                    <span> {{ convertCurrency(cartStore.cart.amount) }}</span>
+                </div>
+                <div>
+                    <button class="bg-primary w-full text-white font-bold h-10 rounded-md">Finalizar pedido</button>
+                </div>
             </div>
         </div>
-       
+
     </div>
 </template>

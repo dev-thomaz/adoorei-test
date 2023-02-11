@@ -69,7 +69,6 @@ mutations:{
             const products = await api.get(`products/`)
            
             state.products = products.data.filter((product: ProductState) => product.title.toUpperCase().indexOf(filter) > -1)
-            console.log(state.products);
           
         } catch (error) {
             console.log(error);

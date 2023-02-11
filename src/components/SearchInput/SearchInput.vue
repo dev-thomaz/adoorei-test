@@ -9,7 +9,7 @@ const inputValue = ref()
 const store = useStore(key);
 async function  submitSearch(){
     await store.dispatch('searchProduct', inputValue.value)
-    router.push('/busca/')
+    router.push(`/busca/${inputValue.value}`)
 }
 </script>
 

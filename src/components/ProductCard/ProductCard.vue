@@ -17,7 +17,7 @@ return  store.getters.checkHasInCart(props.product)
 }
 
 function addProductToCart(product:ProductState){
-   store.commit('addProduct', product)
+   store.dispatch('addProduct', product)
 }
 
 </script>

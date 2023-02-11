@@ -22,7 +22,7 @@ export const loading = {
 
     },
     actions: {
-        setIsLoading({commit}: ActionContext<LoadingState, LoadingState>, payload:boolean){
+        setIsLoading( {commit}: ActionContext<LoadingState, LoadingState>, payload:boolean){
             console.log(payload);
             
             commit('setIsLoading', payload)

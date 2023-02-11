@@ -10,9 +10,10 @@ const router = createRouter({
       meta: {transition: 'fade'}
     },
     {
-      path:'/busca',
+      path:'/busca/:query',
       name:'search',
       component: Search,
+      props: route => ({query: route.query.q}),
     },
     {
       path:'/categoria/:name',

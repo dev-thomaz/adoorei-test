@@ -1,5 +1,5 @@
 import type { ActionContext } from "vuex";
-import type {  RatingState } from "./products-store";
+import type { RatingState } from "./products-store";
 
 
 interface ProductState {
@@ -15,7 +15,7 @@ interface ProductState {
 }
 
 export interface CartState {
-    cart:{
+    cart: {
 
         cart_count: number,
         products: ProductState[],
@@ -24,7 +24,7 @@ export interface CartState {
 }
 
 const state: CartState = {
-    cart:{
+    cart: {
 
         cart_count: 0,
         products: [],
@@ -43,14 +43,14 @@ export const cart = {
         initiCart(state: CartState) {
             const cartProducts = localStorage.getItem('@MyStore:CART_PRODUCTS')
             cartProducts ? state.cart = JSON.parse(cartProducts) : localStorage.setItem('@MyStore:CART_PRODUCTS', JSON.stringify([]))
-            
+
             cartProducts ? state.cart.cart_count = state.cart.products.length : 0
-            
+
         },
         checkHasInCart: (state: CartState) => (product: ProductState) => {
             const checkProduct = state.cart.products.some((prod) => prod.id === product.id)
-            
-            
+
+
             return checkProduct
         },
 
@@ -59,7 +59,11 @@ export const cart = {
             return count[0].count
         },
         getCartAmount: (state: CartState) => () => {
-            return state.cart.amount
+            let cartAmount = 0
+            state.cart.products.map((product) => {
+                cartAmount += product.amount
+            })
+            return cartAmount
         }
 
 
@@ -68,6 +72,15 @@ export const cart = {
     actions: {
         addProduct({ commit }: ActionContext<CartState, CartState>, payload: ProductState) {
             commit('addProduct', payload)
+            commit('updateCartAmount')
+        },
+        incrementProductQtd({ commit }: ActionContext<CartState, CartState>, payload: ProductState) {
+            commit('incrementProductQtd', payload)
+            commit('updateCartAmount')
+        },
+        decreaseProductQtd({ commit }: ActionContext<CartState, CartState>, payload: ProductState) {
+            commit('decreaseProductQtd', payload)
+            commit('updateCartAmount')
         },
 
     },
@@ -110,7 +123,10 @@ export const cart = {
             localStorage.setItem('@MyStore:CART_PRODUCTS', JSON.stringify(state.cart))
         },
 
-
+        updateCartAmount(state: CartState) {
+            state.cart.amount = state.cart.products.reduce((a, b) => a + (b['amount'] || 0), 0);
+            localStorage.setItem('@MyStore:CART_PRODUCTS', JSON.stringify(state.cart))
+        }
     },
 
 }

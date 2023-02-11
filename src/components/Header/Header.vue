@@ -22,7 +22,10 @@ onMounted(async () => {
     <header v-if="innerWidth > 512" class="bg-primary flex pt-4 pl-10 pr-10  justify-between items-center">
    
         <div class="text-white">
-            <span class="font-bold text-lg"> MyStore </span>
+            <RouterLink to="/" >
+                <img  src="@/assets/images/logo.png" class="w-20 h-20 cursor-pointer">
+            </RouterLink>
+            
         </div>
 
         <SearchInput class="w-8/12" v-if="innerWidth > 512" />
@@ -35,7 +38,7 @@ onMounted(async () => {
    <CategoriesPopover />
    </div>
         <div class="text-white">
-            <span class="font-bold text-lg"> MyStore </span>
+            <img src="@/assets/images/logo.png" class="w-16 h-16">
         </div>
 
         <SearchInput class="w-8/12" v-if="innerWidth > 512" />
