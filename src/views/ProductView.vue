@@ -2,39 +2,17 @@
 import { Rating } from '@/components';
 import { key } from '@/store';
 import { useStore } from 'vuex';
-import { useRoute } from 'vue-router'
 import {convertCurrency} from '@/helper/helpers'
-import { onBeforeMount, onMounted, ref, watch } from 'vue';
-import type { ProductState } from '@/store/products-store';
 import {ProductCounter} from '@/components'
+import { onMounted } from 'vue';
 
 
 const store = useStore(key);
 const productState = store.state.products.product
-let product = ref< ProductState>({
-    title:'', 
-    image:'',
-    category:'',
-    description:'',
-    id:0,
-    price:0,
-    rating:{count:0,rate:0}}) 
-// const product = store.state.products.product
-const route = useRoute()
 function calcParcel(price: number){
     return price / 10
 }
-watch(product, async (newValue, oldValue) => {
-    console.log(newValue, oldValue);
-    await store.getters.getProductInfo
-})
-onBeforeMount(async () => {
-    await store.dispatch('getProductById', route.params.id).then((rep) =>{
-        console.log('22222', rep);
-        console.log(product.value);
-        
-    })
-})
+
 
 function checkProductInCart() {
     return store.getters.checkHasInCart(productState)
@@ -43,6 +21,10 @@ function checkProductInCart() {
 function addProductToCart(){
     store.dispatch('addProduct', productState)
 }
+
+onMounted(() => {
+    document.title =productState.title as string;
+})
 
 </script>
 

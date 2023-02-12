@@ -8,7 +8,9 @@ const store = useStore(key);
 const route = useRoute()
 const productsStore = store.state.products
 const query = ref(route.params.name)
+
 onMounted(async () => {
+    document.title = route.params.name as string;
     await store.commit('getProductByCategory', route.params.name)
     console.log(productsStore);
     

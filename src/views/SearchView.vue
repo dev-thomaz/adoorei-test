@@ -10,6 +10,10 @@ const store = useStore(key);
 const productsStore = store.state.products
 const route = useRoute()
 
+onMounted(() => {
+    document.title = `Busca por ${route.params.query} Thomaz Adoorei Store` as string;
+})
+
 </script>
 
 <template>

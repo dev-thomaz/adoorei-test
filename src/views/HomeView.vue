@@ -10,6 +10,7 @@ const productsStore = store.state.products
 const innerWidth = window.innerWidth
 
 onMounted(async () => {
+	document.title = 'Thomaz Adoorei Store - Home';
 	store.dispatch('setIsLoading',false)
 	
 	await store.dispatch('getProducts')
