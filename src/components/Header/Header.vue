@@ -3,7 +3,7 @@ import { onMounted } from 'vue'
 import { SearchInput, CartPopover, CategoriesPopover } from '@/components'
 import { RouterLink } from 'vue-router'
 import { useStore } from 'vuex'
-import { key } from '../../store'
+import { key } from '@/store'
 
 const store = useStore(key);
 const categoriesStore = store.state.categories

@@ -1,12 +1,13 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import {Category, MobileCart, Search} from '@/views'
+import {Home, Category, MobileCart, Product, Search} from '@/views'
+import type { ProductState } from '@/store/products-store'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
       name: 'home',
-      component:() => import('@/views/HomeView.vue'),
+      component: Home,
       meta: {transition: 'fade'}
     },
     {
@@ -26,6 +27,16 @@ const router = createRouter({
       path:'/mobile-cart',
       name: 'mobile-cart',
       component: MobileCart,
+    },
+    {
+      path:'/product/:id',
+      name: 'product',
+      component: Product,
+      props: {
+        product: {
+          
+        } as ProductState
+      },
     }
   ]
 })

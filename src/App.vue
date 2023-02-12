@@ -10,10 +10,6 @@ const loading = store.state.loading
 
 <template>
    <Header/>
-   <Loading  v-if="loading.isLoading"/>
-  <RouterView v-else />
+  <RouterView  />
 </template>
 
-<style scoped>
-
-</style>

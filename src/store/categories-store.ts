@@ -30,20 +30,22 @@ export const categories = {
     },
     mutations: {
         async getCategories(state: CategoriesState) {
+           
             try {
                 const categories = await api.get('products/categories')
                 categories.data.map((category: string) => {
                     const newCategory = {
                         name: category.charAt(0).toUpperCase() + category.slice(1)
                     } as CategoryState
-
-                    state.categories.push(newCategory as CategoryState)
+                    const alreadyExists = state.categories.some((ctgry) => ctgry.name.toLowerCase() === newCategory.name.toLowerCase())
+                   !alreadyExists && state.categories.push(newCategory as CategoryState)
                 })
 
             } catch (error) {
                 console.log(error);
 
             }
+            
         }
     },
 

@@ -18,13 +18,13 @@ export const loading = {
     state,
 
     getters: {
-
+        getIsLoading: (state: LoadingState) => () => {
+            return state.isLoading
+        }
 
     },
     actions: {
         setIsLoading( {commit}: ActionContext<LoadingState, LoadingState>, payload:boolean){
-            console.log(payload);
-            
             commit('setIsLoading', payload)
         }
     },

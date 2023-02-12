@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import CartIcon from '../icons/IconCart.vue'
+import {CartIcon} from '@/components/icons'
 import SadIcon from '../icons/IconSad.vue'
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import { useStore } from 'vuex'
-import { key } from '../../store'
+import { key } from '@/store'
 import { convertCurrency } from '@/helper/helpers'
 import { ProductCounter } from '@/components'
 import { useRouter } from 'vue-router';
@@ -17,7 +17,6 @@ function handlePopOver(value: boolean) {
     isOpen.value = value
     innerWidth < 512 && router.push('/mobile-cart')
 }
-
 
 </script>
 

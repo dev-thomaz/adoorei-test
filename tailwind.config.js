@@ -5,7 +5,9 @@ module.exports = {
   content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
   darkMode:false,
   theme: {
-    extend: {},
+    extend: {
+  
+    },
     colors:{
       transparent: 'transparent',
       primary: '#0A7999',
@@ -20,6 +22,7 @@ module.exports = {
       gray: '#666',
       soft_white: '#F1F1F1'
     },
+  
     screens: {
      
       'sm': '360px',

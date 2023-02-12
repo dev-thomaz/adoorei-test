@@ -1,7 +1,7 @@
 <script setup lang="ts">import { key } from '@/store';
 import { useStore } from 'vuex';
 import { convertCurrency } from '@/helper/helpers'
-import CartIcon from '@/components/icons/IconCart.vue'
+import {CartIcon} from '@/components/icons'
 import SadIcon from '@/components/icons/IconSad.vue'
 import { ProductCounter } from '@/components'
 import {useRouter} from 'vue-router'

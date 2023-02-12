@@ -1,19 +1,12 @@
 <script setup lang="ts">
-import CartIcon from '../icons/IconCart.vue'
-import { onMounted, ref } from 'vue';
+import {  ref } from 'vue';
 import { useStore } from 'vuex'
-import { key } from '../../store'
-import { convertCurrency } from '@/helper/helpers'
-import {ProductCounter} from '@/components'
+import { key } from '@/store'
 import MenuIcon from '@/components/icons/IconMenu.vue'
 
 const store = useStore(key);
 const categoriesStore = store.state.categories
 const isOpen = ref(false)
-
-
-
-
 
 </script>
 

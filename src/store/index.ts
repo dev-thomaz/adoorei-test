@@ -19,5 +19,6 @@ modules: {
     products,
     categories,
     loading,
-}
+},
+
 })

@@ -14,13 +14,13 @@ function getProductQtd(){
 </script>
 
 <template>
-<div v-if="innerWidth > 512" class="flex items-center rounded-md overflow-hidden gap-4 cursor-pointer shadow-md">
-    <button @click="store.dispatch('decreaseProductQtd', product)" class="bg-danger w-8 text-xl text-white hover:bg-danger_dark flex justify-center"> 
+<div v-if="innerWidth > 512" class="flex items-center rounded-md overflow-hidden h-full cursor-pointer shadow-md">
+    <button @click="store.dispatch('decreaseProductQtd', product)" class="bg-danger w-1/3 text-xl h-full  text-white hover:bg-danger_dark flex justify-center items-center"> 
         <TrashIcon v-if="getProductQtd() === 1" class="icon"/> 
         <span v-else>-</span>
     </button>
-    <div>{{getProductQtd()}}</div>
-    <button  @click="store.dispatch('incrementProductQtd', product)" class="bg-positive w-8 text-xl text-white hover:bg-positive_dark">+</button>
+    <div class="w-1/3 flex justify-center">{{getProductQtd()}}</div>
+    <button  @click="store.dispatch('incrementProductQtd', product)" class="bg-positive w-1/3 text-xl h-full text-white hover:bg-positive_dark">+</button>
 </div>
 <div v-else  class="flex items-center rounded-md overflow-hidden gap-5 cursor-pointer shadow-md">
     <button @click="store.dispatch('decreaseProductQtd', product)" class="bg-danger w-8 text-xl text-white hover:bg-danger_dark flex justify-center"> 

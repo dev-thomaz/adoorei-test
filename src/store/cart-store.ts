@@ -39,11 +39,9 @@ export const cart = {
     state,
 
     getters: {
-
         initiCart(state: CartState) {
             const cartProducts = localStorage.getItem('@MyStore:CART_PRODUCTS')
             cartProducts ? state.cart = JSON.parse(cartProducts) : localStorage.setItem('@MyStore:CART_PRODUCTS', JSON.stringify([]))
-
             cartProducts ? state.cart.cart_count = state.cart.products.length : 0
 
         },
