@@ -28,7 +28,7 @@ onMounted(async () => {
 	</div>
 
 
-	<div  class="flex p-4 gap-3 flex-wrap justify-center">
+	<div  class="flex p-2 gap-5 flex-wrap justify-center">
 		<div v-for="(product, index) in productsStore.products">
 			<ProductCard :product="product" />
 		</div>

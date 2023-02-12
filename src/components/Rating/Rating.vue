@@ -25,7 +25,7 @@ generateRatingStar(props.rating)
         </span>
         <span class="text-sm ml-2 text-gray">({{rating.count}} avaliações)</span>
     </div>
-    <div v-else class="flex flex-col py-3 items-center">
+    <div v-else class="flex flex-col justify-center items-center">
         <div class="flex">
             <span v-for="star in generateRatingStar(rating)" class="text-primary flex">
                 <FilledStarIcon v-if="star == 'full'" />
@@ -33,6 +33,6 @@ generateRatingStar(props.rating)
                 <HalfStarIcon v-if="star == 'half'" />
             </span>
         </div>
-        <span class="text-sm ml-5 text-gray">{{rating.count}} avaliações</span>
+        <span class="text-sm  text-gray">{{rating.count}} avaliações</span>
     </div>
 </template>

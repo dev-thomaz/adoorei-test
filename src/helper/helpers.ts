@@ -1,10 +1,10 @@
 import type { RatingState } from "@/store/products-store";
 
 function convertCurrency(value: number){
-    return value.toLocaleString('pt-BR', {
-   style: 'currency',
-   currency: 'BRL',
- });
+    let numero = value.toFixed(2).split('.');
+    numero[0] = "R$ " + numero[0].split(/(?=(?:...)*$)/).join('.');
+    return numero.join(',');
+ 
  }
 
  function generateRatingStar(rating: RatingState) {

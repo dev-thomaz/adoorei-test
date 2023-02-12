@@ -32,12 +32,12 @@ const router = createRouter({
       path:'/product/:id',
       name: 'product',
       component: Product,
-      props: {
-        product: {
-          
-        } as ProductState
-      },
-    }
+    },
+    {
+      path:'/mobile-product/:id',
+      name: 'mobile-product',
+      component: () => import('@/views/MobileProductView.vue'), 
+    },
   ]
 })
 
