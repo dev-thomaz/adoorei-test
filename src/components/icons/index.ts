@@ -5,6 +5,6 @@ import HalfStarIcon from './IconHalfStar.vue'
 import MenuIcon from './IconMenu.vue'
 import SadIcon from './IconSad.vue'
 import TrashIcon from './IconTrash.vue'
-
-
-export {CartIcon, EmptyStarIcon, FilledStarIcon, HalfStarIcon, MenuIcon, SadIcon, TrashIcon}
+import ArrowUpIcon from './IconArrowUp.vue'
+import ArrowDownIcon from './IconArrowDown.vue'
+export {CartIcon, EmptyStarIcon, FilledStarIcon, HalfStarIcon, MenuIcon, SadIcon, TrashIcon, ArrowUpIcon, ArrowDownIcon}

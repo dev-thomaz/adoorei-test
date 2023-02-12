@@ -33,7 +33,7 @@ export const products = {
     getProductInfo: (state: ProductsState) => () => {
       console.log(state.product);
       return state.product
-  },
+    },
   },
   mutations: {
     async getProducts(state: ProductsState) {
@@ -41,9 +41,9 @@ export const products = {
         const categories = await api.get('products/')
         categories.data.map((product: ProductState) => {
           const alreadyExists = state.products.some((prod) => prod.id === product.id)
-          !alreadyExists &&  state.products.push(product as ProductState)
+          !alreadyExists && state.products.push(product as ProductState)
         })
-       
+
       } catch (error) {
         console.log(error);
       }
@@ -65,18 +65,19 @@ export const products = {
     },
     async getProductById(state: ProductsState, payload: number) {
       state.product = {
-        title:'', 
-        image:'',
-        category:'',
-        description:'',
-        id:0,
-        price:0,
-        rating:{count:0,rate:0}}
+        title: '',
+        image: '',
+        category: '',
+        description: '',
+        id: 0,
+        price: 0,
+        rating: { count: 0, rate: 0 }
+      }
       try {
         const product = await api.get(`products/${payload}`)
-       state.product = product.data
-      
-        
+        state.product = product.data
+
+
       } catch (error) {
 
         console.log(error);
@@ -98,6 +99,32 @@ export const products = {
     },
     setProductDetail(state: ProductsState, payload: ProductState) {
       state.product = payload
+    },
+
+    setSortProductList(state: ProductsState, payload: string) {
+      switch (payload) {
+        case 'Nome-asc':
+          state.products = state.products.sort((a: ProductState, b: ProductState) => a.title > b.title ? 1 : ((b.title > a.title) ? -1 : 0))
+          break;
+        case 'Preço-asc':
+          state.products = state.products.sort((a: ProductState, b: ProductState) => a.price - b.price)
+          break;
+        case 'Avaliação-asc':
+          state.products = state.products.sort((a: ProductState, b: ProductState) => a.rating.rate - b.rating.rate)
+          break;
+        case 'Nome-desc':
+          state.products = state.products.sort((a: ProductState, b: ProductState) => a.title > b.title ? -1 : ((b.title > a.title) ? 1 : 0))
+          break;
+        case 'Preço-desc':
+          state.products = state.products.sort((a: ProductState, b: ProductState) => b.price - a.price)
+          break;
+        case 'Avaliação-desc':
+          state.products = state.products.sort((a: ProductState, b: ProductState) => b.rating.rate - a.rating.rate)
+          break;
+        default:
+          state.products = state.products.sort((a: ProductState, b: ProductState) => a.id - b.id)
+          break;
+      }
     }
   },
   actions: {
@@ -113,5 +140,8 @@ export const products = {
     async getProductById({ commit }: ActionContext<ProductState, ProductState>, payload: number) {
       commit('getProductById', payload)
     },
+    async setSortProductList({ commit }: ActionContext<ProductsState, ProductsState>, payload: string) {
+      commit('setSortProductList', payload)
+    }
   }
 }

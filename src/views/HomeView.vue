@@ -11,7 +11,6 @@ const innerWidth = window.innerWidth
 
 onMounted(async () => {
 	document.title = 'Thomaz Adoorei Store - Home';
-	store.dispatch('setIsLoading',false)
 	
 	await store.dispatch('getProducts')
 	
@@ -20,7 +19,6 @@ onMounted(async () => {
 </script>
 
 <template>
-	<Loading/>
 	<div v-if="innerWidth > 512" class="flex justify-center">
 		<img src="../assets/images/banner-1.jpeg" class="w-3/5 p-5">
 	</div>
