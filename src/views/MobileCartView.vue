@@ -11,7 +11,7 @@ const router = useRouter()
 </script>
 
 <template>
-
+    <div class="fixed w-full">
     <div class="flex items-center justify-between p-3 bg-primary text-white">
         <div class="flex gap-5 items-center">
             <CartIcon />
@@ -24,22 +24,24 @@ const router = useRouter()
     </div>
     <div v-if="cartStore.cart.products.length" class="bg-white h-screen flex flex-col">
 
-        <div class="h-5/6 flex flex-col justify-between overflow-y-scroll bg-white">
-            <div v-for="product in cartStore.cart.products" class="my-2">
+        <div class=" flex flex-col gap-2 overflow-y-scroll h-3/5 bg-white">
+            <div v-for="product in cartStore.cart.products" class=" gap-0 flex flex-col justify-start">
 
                 <div class="flex items-center gap-2 p-2">
                     <div class="w-18">
                         <img v-lazy="product.image" class="object-scale-down h-16 w-16 " alt="">
                     </div>
-                    <div class="w-40 whitespace-nowrap text-ellipsis overflow-hidden">
-                        <span class="text-md ">
+                    <div class="w-2/3 flex justify-start   overflow-hidden">
+                        <span class="text-md text-ellipsis">
                             {{ product.title }}
                         </span>
                     </div>
-                    <ProductCounter :product="product" />
+                    <div class="w-1/3 h-8">
+                        <ProductCounter :product="product" />
+                    </div>
 
                 </div>
-                <div class="flex justify-around items-center pb-2">
+                <div class="flex justify-around items-center ">
                     <span class="text-sm ">
                         {{ product.count }} x {{ convertCurrency(product.price) }} = {{
                             convertCurrency(product.amount)
@@ -64,5 +66,5 @@ const router = useRouter()
         <SadIcon class="text-gray" />
         <span class="font-medium"> Oops! Seu carrinho vazio</span>
     </div>
-
+</div>
 </template>
