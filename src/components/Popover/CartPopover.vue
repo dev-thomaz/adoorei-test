@@ -7,6 +7,7 @@ import { key } from '@/store'
 import { convertCurrency } from '@/helper/helpers'
 import { ProductCounter } from '@/components'
 import { useRouter } from 'vue-router';
+import type { ProductState } from '@/store/products-store';
 const store = useStore(key);
 const cartStore = store.state.cart
 const isOpen = ref(false)
@@ -17,7 +18,12 @@ function handlePopOver(value: boolean) {
     isOpen.value = value
     innerWidth < 512 && router.push('/mobile-cart')
 }
-
+function handleProductDetail(product: ProductState) {
+    store.dispatch('setProductDetail', product).then(() => {
+        router.push(`/product/${product.id}`)
+        isOpen.value = false
+    })
+}
 </script>
 
 <template>
@@ -30,12 +36,12 @@ function handlePopOver(value: boolean) {
         </div>
 
         <div v-if="innerWidth > 512" v-show="isOpen" class="bg-white text-black rounded-lg absolute top-4 w-80 z-10 right-2 p-2">
-            <div v-if="cartStore.cart.products.length" class="h-80 overflow-y-scroll  p-2">
+            <div v-if="cartStore.cart.products.length" class="h-80 overflow-y-scroll gap-5  p-2">
 
                 <div  v-for="product in cartStore.cart.products" class="">
 
                     <div class="flex items-center gap-2">
-                        <div class="w-18 ">
+                        <div @click="handleProductDetail(product)" class="w-18 ">
                             <img v-lazy="product.image" class="object-scale-down h-16 w-16 " alt="">
                         </div>
                         <div class=" w-28 text-ellipsis overflow-hidden">
@@ -43,7 +49,9 @@ function handlePopOver(value: boolean) {
                                 {{ product.title }}
                             </span>
                         </div>
-                        <ProductCounter :product="product" />
+                        <div class="w-1/3">
+                            <ProductCounter :product="product" />
+                        </div>
 
                     </div>
                     <div class="flex justify-around items-center">
