@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ProductCard } from '@/components';
 import { key } from '@/store';
-import { onMounted, ref, watch } from 'vue';
+import { onMounted } from 'vue';
 import { useStore } from 'vuex';
 
 
@@ -11,7 +11,6 @@ const innerWidth = window.innerWidth
 
 onMounted(async () => {
 	document.title = 'MyStore';
-	
 	await store.dispatch('getProducts')
 	
 	
@@ -28,7 +27,7 @@ onMounted(async () => {
 
 
 	<div  class="flex p-2 gap-5 flex-wrap justify-center">
-		<div v-for="(product, index) in productsStore.products">
+		<div v-for="(product) in productsStore.products">
 			<ProductCard :product="product" />
 		</div>
 	</div>

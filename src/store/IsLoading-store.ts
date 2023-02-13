@@ -1,4 +1,3 @@
-import { api } from "@/services/api";
 import type { ActionContext } from "vuex";
 
 export interface LoadingState {
@@ -24,7 +23,7 @@ export const loading = {
 
     },
     actions: {
-        setIsLoading( {commit}: ActionContext<LoadingState, LoadingState>, payload:boolean){
+        setIsLoading({ commit }: ActionContext<LoadingState, LoadingState>, payload: boolean) {
             commit('setIsLoading', payload)
         }
     },

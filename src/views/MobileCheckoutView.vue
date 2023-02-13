@@ -3,13 +3,8 @@ import { onMounted, ref } from 'vue';
 import { useStore } from 'vuex'
 import { key } from '@/store'
 import { convertCurrency } from '@/helper/helpers'
-import { ProductCounter } from '@/components'
-import { useRouter } from 'vue-router';
-import type { ProductState } from '@/store/products-store';
-import CreditCard from '@/assets/images/credit_card.png';
-import BarCode from '@/assets/images/bar_code.png';
-import Pix from '@/assets/images/Pix.png';
-import Qrcode from '@/assets/images/qr_code.png';
+
+
 import router from '@/router';
 const store = useStore(key);
 const cartStore = store.state.cart
@@ -25,9 +20,9 @@ const showModal = ref<boolean>(false)
 const showToast = ref<boolean>(false)
 const pixCode: string = '35375382309527304973058465983475092385923857623049672340967923847982347982374023580239582349582039570'
 const paymentForms: paymentType[] = [
-    { id: 1, type: 'Crédito', img: CreditCard },
-    { id: 2, type: 'Boleto', img: BarCode },
-    { id: 3, type: 'Pix', img: Pix },
+    { id: 1, type: 'Crédito', img: '@/assets/images/credit_card.png' },
+    { id: 2, type: 'Boleto', img: '@/assets/images/bar_code.png' },
+    { id: 3, type: 'Pix', img: '@/assets/images/Pix.png'  },
 ]
 
 const userLogged = {

@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import {CartIcon} from '@/components/icons'
+import { CartIcon } from '@/components/icons'
 import SadIcon from '../icons/IconSad.vue'
-import { onMounted, ref } from 'vue';
+import { ref } from 'vue';
 import { useStore } from 'vuex'
 import { key } from '@/store'
 import { convertCurrency } from '@/helper/helpers'
@@ -25,7 +25,7 @@ function handleProductDetail(product: ProductState) {
     })
 }
 
-function handleCheckout(){
+function handleCheckout() {
     router.push('/checkout/')
     isOpen.value = false
 }
@@ -40,10 +40,11 @@ function handleCheckout(){
             <span>{{ cartStore.cart.cart_count }}</span>
         </div>
 
-        <div v-if="innerWidth > 512" v-show="isOpen" class="bg-white text-black rounded-lg absolute top-4 w-80 z-10 right-2 p-2">
+        <div v-if="innerWidth > 512" v-show="isOpen"
+            class="bg-white text-black rounded-lg absolute top-4 w-80 z-10 right-2 p-2">
             <div v-if="cartStore.cart.products.length" class="h-80 overflow-y-scroll gap-5  p-2">
 
-                <div  v-for="product in cartStore.cart.products" class="">
+                <div v-for="product in cartStore.cart.products" class="">
 
                     <div class="flex items-center gap-2">
                         <div @click="handleProductDetail(product)" class="w-18 ">
@@ -70,7 +71,7 @@ function handleCheckout(){
                 </div>
             </div>
             <div class="flex justify-center items-center  h-20" v-else>
-                <SadIcon class="text-gray"/>
+                <SadIcon class="text-gray" />
                 <span>oops! seu carrinho está vazio!</span>
             </div>
             <div v-show="cartStore.cart.products.length">
@@ -79,7 +80,8 @@ function handleCheckout(){
                     <span> {{ convertCurrency(cartStore.cart.amount) }}</span>
                 </div>
                 <div>
-                    <button @click="handleCheckout()" class="bg-primary w-full text-white font-bold h-10 rounded-md">Finalizar pedido</button>
+                    <button @click="handleCheckout()"
+                        class="bg-primary w-full text-white font-bold h-10 rounded-md">Finalizar pedido</button>
                 </div>
             </div>
         </div>

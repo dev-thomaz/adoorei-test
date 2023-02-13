@@ -1,6 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import {Home, Category, MobileCart, Product, Search} from '@/views'
-import type { ProductState } from '@/store/products-store'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -29,7 +27,7 @@ const router = createRouter({
     {
       path:'/product/:id',
       name: 'product',
-      component: Product,
+      component: () => import('@/views/ProductView.vue'),
     },
     {
       path:'/mobile-product/:id',

@@ -5,7 +5,7 @@ import { key } from '../../store'
 import { CartIcon } from '@/components/icons'
 import { ProductCounter, Rating } from '@/components'
 import { convertCurrency } from '@/helper/helpers'
-import { useRouter, RouterLink } from 'vue-router'
+import { useRouter } from 'vue-router'
 
 const props = defineProps<{
     product: ProductState

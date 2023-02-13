@@ -64,8 +64,6 @@ export const cart = {
             return cartAmount
         },
         getTotalCount: (state: CartState) => {
-            console.log(state.cart.products.reduce((a, b) => a + (b['count'] || 0), 0));
-            
             return state.cart.products.reduce((a, b) => a + (b['count'] || 0), 0);
         }
 

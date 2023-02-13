@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { h } from 'vue';
 import type { RatingState } from '@/store/products-store';
 import {HalfStarIcon} from '@/components/icons/';
 import {FilledStarIcon} from '@/components/icons/';
