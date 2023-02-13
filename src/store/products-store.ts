@@ -1,5 +1,6 @@
 import { api } from "@/services/api";
-import type { ActionContext } from "vuex";
+import type { ActionContext, Module } from "vuex";
+import type { State } from ".";
 
 
 export interface RatingState {
@@ -26,7 +27,7 @@ const state: ProductsState = {
   product: {} as ProductState
 }
 
-export const products = {
+export const products: Module<ProductsState, State>   = {
   state,
 
   getters: {
@@ -128,19 +129,19 @@ export const products = {
     }
   },
   actions: {
-    async getProducts({ commit, dispatch }: ActionContext<ProductState, ProductState>) {
+    async getProducts({ commit }: ActionContext<ProductsState, State>) {
       commit('getProducts')
     },
-    async searchProduct({ commit }: ActionContext<ProductState, ProductState>, payload: string) {
+    async searchProduct({ commit }: ActionContext<ProductsState, State>, payload: string) {
       commit('searchProduct', payload)
     },
-    async setProductDetail({ commit }: ActionContext<ProductState, ProductState>, payload: ProductState) {
+    async setProductDetail({ commit }: ActionContext<ProductsState, State>, payload: ProductState) {
       commit('setProductDetail', payload)
     },
-    async getProductById({ commit }: ActionContext<ProductState, ProductState>, payload: number) {
+    async getProductById({ commit }: ActionContext<ProductsState, State>, payload: number) {
       commit('getProductById', payload)
     },
-    async setSortProductList({ commit }: ActionContext<ProductsState, ProductsState>, payload: string) {
+    async setSortProductList({ commit }: ActionContext<ProductsState, State>, payload: string) {
       commit('setSortProductList', payload)
     }
   }

@@ -1,5 +1,6 @@
 import { api } from "@/services/api";
-import type { ActionContext } from "vuex";
+import type { ActionContext, Module } from "vuex";
+import type { State } from ".";
 
 interface CategoryState {
     name: string;
@@ -15,7 +16,7 @@ const state: CategoriesState = {
 
 
 
-export const categories = {
+export const categories: Module<CategoriesState, State> = {
 
     state,
 
@@ -24,7 +25,7 @@ export const categories = {
 
     },
     actions: {
-        getCategories({commit}: ActionContext<CategoriesState, CategoriesState>){
+        getCategories({commit}: ActionContext<CategoriesState, State>){
             commit('getCategories')
         }
     },

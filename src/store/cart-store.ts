@@ -1,4 +1,5 @@
-import type { ActionContext } from "vuex";
+import type { ActionContext, Module } from "vuex";
+import type { State } from ".";
 import type { RatingState } from "./products-store";
 
 
@@ -34,7 +35,7 @@ const state: CartState = {
 
 
 
-export const cart = {
+export const cart: Module<CartState, State> = {
 
     state,
 
@@ -71,19 +72,19 @@ export const cart = {
 
     },
     actions: {
-        addProduct({ commit }: ActionContext<CartState, CartState>, payload: ProductState) {
+        addProduct({ commit }: ActionContext<CartState, State>, payload: ProductState) {
             commit('addProduct', payload)
             commit('updateCartAmount')
         },
-        incrementProductQtd({ commit }: ActionContext<CartState, CartState>, payload: ProductState) {
+        incrementProductQtd({ commit }: ActionContext<CartState, State>, payload: ProductState) {
             commit('incrementProductQtd', payload)
             commit('updateCartAmount')
         },
-        decreaseProductQtd({ commit }: ActionContext<CartState, CartState>, payload: ProductState) {
+        decreaseProductQtd({ commit }: ActionContext<CartState, State>, payload: ProductState) {
             commit('decreaseProductQtd', payload)
             commit('updateCartAmount')
         },
-        finishCart({commit}: ActionContext<CartState, CartState> ){
+        finishCart({commit}: ActionContext<CartState, State> ){
             commit('finishCart')
 
         }
