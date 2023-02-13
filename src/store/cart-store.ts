@@ -26,7 +26,6 @@ export interface CartState {
 
 const state: CartState = {
     cart: {
-
         cart_count: 0,
         products: [],
         amount: 0,
@@ -42,7 +41,9 @@ export const cart: Module<CartState, State> = {
     getters: {
         initiCart(state: CartState) {
             const cartProducts = localStorage.getItem('@MyStore:CART_PRODUCTS')
-            cartProducts ? state.cart = JSON.parse(cartProducts) : localStorage.setItem('@MyStore:CART_PRODUCTS', JSON.stringify([]))
+            cartProducts ? state.cart = JSON.parse(cartProducts) : localStorage.setItem('@MyStore:CART_PRODUCTS', JSON.stringify({ cart_count: 0,
+                products: [],
+                amount: 0,}))
             cartProducts ? state.cart.cart_count = state.cart.products.length : 0
 
         },
