@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ProductCard, Loading } from '@/components';
+import { ProductCard } from '@/components';
 import { key } from '@/store';
 import { onMounted, ref } from 'vue';
 import { useStore } from 'vuex';
@@ -11,13 +11,12 @@ const productsStore = store.state.products
 const route = useRoute()
 
 onMounted(() => {
-    document.title = `Busca por ${route.params.query} Thomaz Adoorei Store` as string;
+    document.title = `Busca por "${route.params.query}" - MyStore` as string;
 })
 
 </script>
 
 <template>
-	<Loading />
 <div class="p-5 text-xl">
     <span class="font-medium underline">Resultado da busca {{route.params.query}}</span>
 </div>

@@ -38,6 +38,11 @@ const router = createRouter({
       name: 'mobile-product',
       component: () => import('@/views/MobileProductView.vue'), 
     },
+    {
+      path:'/checkout',
+      name: 'checkout',
+      component: () => import('@/views/CheckoutView.vue'), 
+    },
   ]
 })
 

@@ -20,7 +20,9 @@ module.exports = {
       white_soft:'#FBFBFB',
       black: '#000',
       gray: '#666',
-      soft_white: '#F1F1F1'
+      soft_white: '#F1F1F1',
+      soft_gray: '#F8F8F8',
+      black_rgba: 'rgba(0, 0, 0, 0.54)',
     },
   
     screens: {

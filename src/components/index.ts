@@ -5,5 +5,4 @@ import Rating from './Rating/Rating.vue'
 import SearchInput from './SearchInput/SearchInput.vue'
 import CartPopover from './Popover/CartPopover.vue'
 import CategoriesPopover from './Popover/CategoriesPopover.vue'
-import Loading from './Loading/loading.vue'
-export  { Header, ProductCard, ProductCounter, Rating, SearchInput, CartPopover, CategoriesPopover, Loading}
+export  { Header, ProductCard, ProductCounter, Rating, SearchInput, CartPopover, CategoriesPopover}

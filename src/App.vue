@@ -1,11 +1,10 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router'
-import  {Header,Loading}  from './components/';
+import  {Header}  from './components/';
 import { useStore } from 'vuex'
 import { key } from '@/store'
 
 const store = useStore(key);
-const loading = store.state.loading
 </script>
 
 <template>

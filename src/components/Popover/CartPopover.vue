@@ -24,6 +24,11 @@ function handleProductDetail(product: ProductState) {
         isOpen.value = false
     })
 }
+
+function handleCheckout(){
+    router.push('/checkout/')
+    isOpen.value = false
+}
 </script>
 
 <template>
@@ -74,7 +79,7 @@ function handleProductDetail(product: ProductState) {
                     <span> {{ convertCurrency(cartStore.cart.amount) }}</span>
                 </div>
                 <div>
-                    <button class="bg-primary w-full text-white font-bold h-10 rounded-md">Finalizar pedido</button>
+                    <button @click="handleCheckout()" class="bg-primary w-full text-white font-bold h-10 rounded-md">Finalizar pedido</button>
                 </div>
             </div>
         </div>

@@ -62,6 +62,11 @@ export const cart = {
                 cartAmount += product.amount
             })
             return cartAmount
+        },
+        getTotalCount: (state: CartState) => {
+            console.log(state.cart.products.reduce((a, b) => a + (b['count'] || 0), 0));
+            
+            return state.cart.products.reduce((a, b) => a + (b['count'] || 0), 0);
         }
 
 
@@ -80,6 +85,10 @@ export const cart = {
             commit('decreaseProductQtd', payload)
             commit('updateCartAmount')
         },
+        finishCart({commit}: ActionContext<CartState, CartState> ){
+            commit('finishCart')
+
+        }
 
     },
     mutations: {
@@ -123,6 +132,15 @@ export const cart = {
 
         updateCartAmount(state: CartState) {
             state.cart.amount = state.cart.products.reduce((a, b) => a + (b['amount'] || 0), 0);
+            localStorage.setItem('@MyStore:CART_PRODUCTS', JSON.stringify(state.cart))
+        },
+        finishCart(state: CartState){
+            state.cart = {
+                amount: 0,
+                products: [],
+                cart_count: 0
+
+            }
             localStorage.setItem('@MyStore:CART_PRODUCTS', JSON.stringify(state.cart))
         }
     },

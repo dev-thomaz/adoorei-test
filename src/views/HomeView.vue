@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ProductCard, Loading } from '@/components';
+import { ProductCard } from '@/components';
 import { key } from '@/store';
 import { onMounted, ref, watch } from 'vue';
 import { useStore } from 'vuex';
@@ -10,7 +10,7 @@ const productsStore = store.state.products
 const innerWidth = window.innerWidth
 
 onMounted(async () => {
-	document.title = 'Thomaz Adoorei Store - Home';
+	document.title = 'MyStore';
 	
 	await store.dispatch('getProducts')
 	
