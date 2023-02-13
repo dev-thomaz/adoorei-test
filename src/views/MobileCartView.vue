@@ -65,7 +65,7 @@ function handleProductDetail(product: ProductState) {
                     <span> {{ convertCurrency(cartStore.cart.amount) }}</span>
                 </div>
                 <div class="flex justify-center">
-                    <button class="bg-primary w-5/6 text-white font-bold h-14 rounded-md">Finalizar pedido</button>
+                    <button @click="router.push('/mobile-checkout')" class="bg-primary w-5/6 text-white font-bold h-14 rounded-md">Finalizar pedido</button>
                 </div>
             </div>
         </div>

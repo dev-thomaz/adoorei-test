@@ -7,26 +7,24 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: Home,
+      component: () => import('@/views/HomeView.vue'),
       meta: {transition: 'fade'}
     },
     {
       path:'/busca/:query',
       name:'search',
-      component: Search,
+      component: () => import('@/views/SearchView.vue'),
       props: route => ({query: route.query.q}),
     },
     {
       path:'/categoria/:name',
       name:'caterogy',
-      component: Category,
-      props: route => ({query: route.query.q}),
-      meta: {transition: 'fade'},
+      component: () => import('@/views/CategoryView.vue'),
     },
     {
       path:'/mobile-cart',
       name: 'mobile-cart',
-      component: MobileCart,
+      component: () => import('@/views/MobileCartView.vue')
     },
     {
       path:'/product/:id',
@@ -43,6 +41,11 @@ const router = createRouter({
       name: 'checkout',
       component: () => import('@/views/CheckoutView.vue'), 
     },
+    {
+      path:'/mobile-checkout',
+      name:'mobile-checkout',
+      component: () => import('@/views/MobileCheckoutView.vue')
+    }
   ]
 })
 

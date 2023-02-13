@@ -4,10 +4,12 @@ import { key } from '@/store';
 import { useStore } from 'vuex';
 import {convertCurrency} from '@/helper/helpers'
 import {ProductCounter} from '@/components'
+import {useRouter} from 'vue-router'
 
 
 const store = useStore(key);
 const productState = store.state.products.product
+const router = useRouter()
 function calcParcel(price: number){
     return parseFloat ((price / 10).toFixed(3))
 }
@@ -18,6 +20,11 @@ function checkProductInCart() {
 }
 
 function addProductToCart(){
+    store.dispatch('addProduct', productState)
+}
+
+function handleBuyDirect(){
+    router.push('/mobile-checkout')
     store.dispatch('addProduct', productState)
 }
 </script>
@@ -44,7 +51,7 @@ function addProductToCart(){
         <div v-else class="h-12  mb-2">
             <ProductCounter  :product="productState" />
         </div>
-        <button class="bg-primary p-3 rounded-md text-white font-medium w-full text-lg">comprar</button>
+        <button @click="handleBuyDirect()" class="bg-primary p-3 rounded-md text-white font-medium w-full text-lg">comprar</button>
     </div>
     
 </div>
